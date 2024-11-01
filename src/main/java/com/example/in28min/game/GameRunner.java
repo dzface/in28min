@@ -1,8 +1,8 @@
 package com.example.in28min.game;
 
 public class GameRunner {
-    private SuperContra game;
-    public GameRunner(SuperContra game) {
+    private GamingConsole game;
+    public GameRunner(GamingConsole game) {
         this.game = game;
     }
     public void run(){

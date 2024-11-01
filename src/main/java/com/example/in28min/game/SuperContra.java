@@ -1,6 +1,6 @@
 package com.example.in28min.game;
 
-public class SuperContra {
+public class SuperContra implements GamingConsole{
     public void up() {
         System.out.println("up");
     }

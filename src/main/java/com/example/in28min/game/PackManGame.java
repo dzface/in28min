@@ -1,5 +1,8 @@
 package com.example.in28min.game;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class PackManGame implements GamingConsole {
     public PackManGame(){
 

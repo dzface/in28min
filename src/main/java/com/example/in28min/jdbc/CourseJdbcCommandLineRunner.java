@@ -28,5 +28,8 @@ public class CourseJdbcCommandLineRunner implements CommandLineRunner {
         repository.deleteById(1l);
         System.out.println(repository.findById(2l));
 
+        System.out.println(repository.findByAuthor("in28minutes"));
+        System.out.println(repository.findByNameOrAuthor("Learn React Basic","in28minutes"));
+
     }
 }

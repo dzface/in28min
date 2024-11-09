@@ -32,4 +32,11 @@ public class TestController {
         sb.append("</html>");
         return sb;
     }
+
+    //JSP 파일 출력
+    // path: src/main/webapp/WEB-INF/mainJpa.jsp
+    @RequestMapping("/")
+    public String mainJpa(){
+        return "mainJpa";
+    }
 }

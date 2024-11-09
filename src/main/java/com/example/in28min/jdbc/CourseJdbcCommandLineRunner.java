@@ -2,6 +2,7 @@ package com.example.in28min.jdbc;
 
 import com.example.in28min.entity.Course;
 import com.example.in28min.repository.CourseRepository;
+import com.example.in28min.repository.CourseSpringJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -13,17 +14,19 @@ import org.springframework.stereotype.Component;
 public class CourseJdbcCommandLineRunner implements CommandLineRunner {
 //    @Autowired
 //    private CourseJdbcRepository repository;
+//    @Autowired
+//    private CourseRepository repository;
     @Autowired
-    private CourseRepository repository;
+    private CourseSpringJpaRepository repository;
     @Override
     public void run(String... args) throws Exception { // 지금 테이블에 데이터를 삽입하는 코드인데 테이블이 생성되어있지 않으면 오류발생
-        repository.insert(new Course(1, "Learn AWS Basic","in28minutes"));
-        repository.insert(new Course(2, "Learn Python Basic","in28minutes"));
-        repository.insert(new Course(3, "Learn React Basic","in28minutes"));
+        repository.save(new Course(1, "Learn AWS Basic","in28minutes"));
+        repository.save(new Course(2, "Learn Python Basic","in28minutes"));
+        repository.save(new Course(3, "Learn React Basic","in28minutes"));
 
 
-        repository.deleteById(1);
-        System.out.println(repository.findById(2));
+        repository.deleteById(1l);
+        System.out.println(repository.findById(2l));
 
     }
 }

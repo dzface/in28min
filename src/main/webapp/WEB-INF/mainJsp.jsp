@@ -5,6 +5,6 @@
         </title>
     </head>
     <body>
-        This is login page ${name}!
+        Welcome Quote Archive,  ${name} bro!
     </body>
 </html>

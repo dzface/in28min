@@ -7,3 +7,5 @@
 
 실행하기
 java -jar build/libs/in28min-0.0.1-SNAPSHOT.jar
+
+# URL 주소앞에 view-source: 붙이면 html만 나옴 ㅋㅋ

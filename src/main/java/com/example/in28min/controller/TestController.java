@@ -34,9 +34,9 @@ public class TestController {
     }
 
     //JSP 파일 출력
-    // path: src/main/webapp/WEB-INF/mainJpa.jsp
+    // path: src/main/webapp/WEB-INF/mainJsp.jsp
     @RequestMapping("/")
-    public String mainJpa(){
-        return "mainJpa";
+    public String mainJsp(){
+        return "mainJsp";
     }
 }

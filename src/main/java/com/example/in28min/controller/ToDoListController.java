@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -20,9 +21,19 @@ public class ToDoListController {
         this.todoService = todoService;
     }
     @RequestMapping(value = "todo-list", method = RequestMethod.GET)
-    public String ShowToDolist(ModelMap modle){
+    public String showToDolist(ModelMap model){
         List<TodoList> list= todoService.findByUserName("in28minutes");
-        modle.addAttribute("list", list);
+        model.addAttribute("list", list);
         return "toDoListJsp";
+    }
+    @RequestMapping(value = "add-todo", method = RequestMethod.GET)
+    public String showAddToDoItem(){
+        return "addToDoJsp";
+    }
+    @RequestMapping(value = "add-todo", method = RequestMethod.POST)
+    public String addToDoItem(@RequestParam(value = "description") String description, ModelMap model){
+        String userName = (String)model.get("name");
+        todoService.addToDoItem(userName, description, LocalDate.now().plusMonths(1), false);
+        return "redirect:todo-list";
     }
 }

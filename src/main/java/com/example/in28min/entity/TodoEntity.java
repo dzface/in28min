@@ -1,17 +1,22 @@
 package com.example.in28min.entity;
 
-import jakarta.persistence.Entity;
+import jakarta.validation.constraints.Size;
 
+import java.beans.ConstructorProperties;
 import java.time.LocalDate;
 
-public class TodoList {
+public class TodoEntity {
     private int id;
     private String userName;
+    @Size(min = 5, message = "type over than 5 character")
     private String description;
     private LocalDate targetDate;
     private boolean done;
+    //예제랑 다르게
 
-    public TodoList(int id, String userName, String description, LocalDate targetDate, boolean done) {
+    @ConstructorProperties({"id","userName","description","targetDate","done"})
+    //예제랑 다르게 @ConstructorProperties를 추가해야함
+    public TodoEntity(int id, String userName, String description, LocalDate targetDate, boolean done) {
         this.id = id;
         this.userName = userName;
         this.description = description;

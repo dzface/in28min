@@ -1,14 +1,13 @@
 package com.example.in28min.controller;
 
-import com.example.in28min.entity.TodoList;
+import com.example.in28min.entity.TodoEntity;
 import com.example.in28min.service.TodoService;
-import org.springframework.cglib.core.Local;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.time.LocalDate;
@@ -23,21 +22,24 @@ public class ToDoListController {
     }
     @RequestMapping(value = "todo-list", method = RequestMethod.GET)
     public String showToDolist(ModelMap model){
-        List<TodoList> list= todoService.findByUserName("in28minutes");
+        List<TodoEntity> list= todoService.findByUserName("in28minutes");
         model.addAttribute("list", list);
         return "toDoListJsp";
     }
     @RequestMapping(value = "add-todo", method = RequestMethod.GET)
     public String showAddToDoItem(ModelMap model){
         String userName = (String)model.get("name");
-        TodoList todoList = new TodoList(0, userName, "", LocalDate.now().plusMonths(1), false);
-        model.put("todoList", todoList);
+        TodoEntity todoEntity = new TodoEntity(0, userName, "", LocalDate.now().plusMonths(1), false);
+        model.put("todoEntity", todoEntity);
         return "addToDoJsp";
     }
     @RequestMapping(value = "add-todo", method = RequestMethod.POST)
-    public String addToDoItem(ModelMap model, TodoList todoList){
+    public String addToDoItem(ModelMap model, @Valid TodoEntity todoEntity, BindingResult result){
+        if(result.hasErrors()){
+            return "addToDoJsp";
+        }
         String userName = (String)model.get("name");
-        todoService.addToDoItem(userName, todoList.getDescription(), LocalDate.now().plusMonths(1), false);
+        todoService.addToDoItem(userName, todoEntity.getDescription(), LocalDate.now().plusMonths(1), false);
         return "redirect:todo-list";
     }
 }

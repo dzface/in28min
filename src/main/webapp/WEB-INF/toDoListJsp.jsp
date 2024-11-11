@@ -6,6 +6,7 @@
     </head>
     <body>
         <p>
+        Welcome ${name}<br>
         ${list}
         </p>
     </body>

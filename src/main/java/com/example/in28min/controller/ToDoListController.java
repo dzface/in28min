@@ -2,6 +2,7 @@ package com.example.in28min.controller;
 
 import com.example.in28min.entity.TodoList;
 import com.example.in28min.service.TodoService;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -27,13 +28,16 @@ public class ToDoListController {
         return "toDoListJsp";
     }
     @RequestMapping(value = "add-todo", method = RequestMethod.GET)
-    public String showAddToDoItem(){
+    public String showAddToDoItem(ModelMap model){
+        String userName = (String)model.get("name");
+        TodoList todoList = new TodoList(0, userName, "", LocalDate.now().plusMonths(1), false);
+        model.put("todoList", todoList);
         return "addToDoJsp";
     }
     @RequestMapping(value = "add-todo", method = RequestMethod.POST)
-    public String addToDoItem(@RequestParam(value = "description") String description, ModelMap model){
+    public String addToDoItem(ModelMap model, TodoList todoList){
         String userName = (String)model.get("name");
-        todoService.addToDoItem(userName, description, LocalDate.now().plusMonths(1), false);
+        todoService.addToDoItem(userName, todoList.getDescription(), LocalDate.now().plusMonths(1), false);
         return "redirect:todo-list";
     }
 }

@@ -1,5 +1,7 @@
 package com.example.in28min.entity;
 
+import jakarta.persistence.Entity;
+
 import java.time.LocalDate;
 
 public class TodoList {
